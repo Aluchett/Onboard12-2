@@ -16,4 +16,6 @@ public class Customer
     public required string Address { get; set; }
     
     public ICollection<Sales>? Sales { get; set; }
+    public DateTime Updated { get; internal set; }
+    public DateTime Created { get; internal set; }
 }

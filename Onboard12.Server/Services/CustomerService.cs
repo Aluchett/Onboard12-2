@@ -3,14 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using StoreReact.Models;
 using StoreReact.ViewModels;
 
-
-
 namespace StoreReact.Services;
 
-public class CustomerService : ICustomerService 
-
+public class CustomerService : ICustomerService
 {
-     private readonly StoreDbContext _context;
+    private readonly StoreDbContext _context;
     private readonly IMapper _mapper;
 
     public CustomerService(StoreDbContext context, IMapper mapper)
@@ -41,11 +38,10 @@ public class CustomerService : ICustomerService
     public async Task<CustomerViewModel> CreateCustomer(CreateCustomerRequest request)
     {
         var customer = _mapper.Map<Customer>(request);
+        customer.Updated = DateTime.Now;
+        customer.Created = DateTime.Now;
 
-       // customer.Updated = DateTime.Now;
-        //customer.Created = DateTime.Now;//
-
-        //context.Customers.Add(customer);//
+        _context.Customers.Add(customer);
         await _context.SaveChangesAsync();
 
         return _mapper.Map<CustomerViewModel>(customer);
@@ -61,7 +57,7 @@ public class CustomerService : ICustomerService
         }
 
         customer = _mapper.Map(request, customer);
-        //customer.Updated = DateTime.Now;//
+        customer.Updated = DateTime.Now;
 
         _context.Customers.Update(customer);
         await _context.SaveChangesAsync();
@@ -82,5 +78,4 @@ public class CustomerService : ICustomerService
         await _context.SaveChangesAsync();
 
     }
-
 }
