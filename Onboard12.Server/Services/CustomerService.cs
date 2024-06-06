@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StoreReact.Models;
+using Onboard12.Server.Models;
+using Onboard12.Server.Services;
+using Onboard12.Server.ViewModels;
+
 using StoreReact.ViewModels;
 
-namespace StoreReact.Services;
+namespace StoreReact.Server.Services; 
 
-public class CustomerService : ICustomerService
+public class CustomerService : ICustomerService 
 {
     private readonly StoreDbContext _context;
     private readonly IMapper _mapper;

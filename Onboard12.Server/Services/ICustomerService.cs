@@ -1,7 +1,8 @@
-﻿using StoreReact.ViewModels;
+﻿using Onboard12.Server.ViewModels;
+using StoreReact.ViewModels;
 
 
-namespace StoreReact.Services; 
+namespace Onboard12.Server.Services;
 
 public interface ICustomerService
 {

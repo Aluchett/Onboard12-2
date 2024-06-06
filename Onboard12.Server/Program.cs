@@ -1,7 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using StoreReact.Mapping;
-using StoreReact.Models;
-using StoreReact.Services;
+using Onboard12.Server.Services;
+using Onboard12.Server.Mapping;
+using Onboard12.Server.Models;
+using StoreReact.Server.Services;
+using Store_Onboard12.Server.Services;
+
+
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IStoreService, StoreService>();
+builder.Services.AddScoped<ISalesService, SalesService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -50,3 +58,4 @@ app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
 app.Run();
+

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StoreReact.ViewModels;
+namespace Onboard12.Server.ViewModels; 
 
 public class CustomerViewModel
 {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using StoreReact.Models;
+using Onboard12.Server.Models;
 
 #nullable disable
 
@@ -22,7 +22,7 @@ namespace Onboard12.Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("StoreReact.Models.Customer", b =>
+            modelBuilder.Entity("Onboard12.Server.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,16 +32,14 @@ namespace Onboard12.Server.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
@@ -52,7 +50,7 @@ namespace Onboard12.Server.Migrations
                     b.ToTable("Customer", (string)null);
                 });
 
-            modelBuilder.Entity("StoreReact.Models.Product", b =>
+            modelBuilder.Entity("Onboard12.Server.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,14 +58,18 @@ namespace Onboard12.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id")
                         .HasName("PK_Product");
@@ -75,7 +77,7 @@ namespace Onboard12.Server.Migrations
                     b.ToTable("Product", (string)null);
                 });
 
-            modelBuilder.Entity("StoreReact.Models.Sales", b =>
+            modelBuilder.Entity("Onboard12.Server.Models.Sales", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -119,7 +121,7 @@ namespace Onboard12.Server.Migrations
                     b.ToTable("Sales", (string)null);
                 });
 
-            modelBuilder.Entity("StoreReact.Models.Store", b =>
+            modelBuilder.Entity("Onboard12.Server.Models.Store", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,16 +131,14 @@ namespace Onboard12.Server.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
@@ -149,23 +149,23 @@ namespace Onboard12.Server.Migrations
                     b.ToTable("Store", (string)null);
                 });
 
-            modelBuilder.Entity("StoreReact.Models.Sales", b =>
+            modelBuilder.Entity("Onboard12.Server.Models.Sales", b =>
                 {
-                    b.HasOne("StoreReact.Models.Customer", "Customer")
+                    b.HasOne("Onboard12.Server.Models.Customer", "Customer")
                         .WithMany("Sales")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Sales_Customer");
 
-                    b.HasOne("StoreReact.Models.Product", "Product")
+                    b.HasOne("Onboard12.Server.Models.Product", "Product")
                         .WithMany("Sales")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Sales_Product");
 
-                    b.HasOne("StoreReact.Models.Store", "Store")
+                    b.HasOne("Onboard12.Server.Models.Store", "Store")
                         .WithMany("Sales")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -179,17 +179,17 @@ namespace Onboard12.Server.Migrations
                     b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("StoreReact.Models.Customer", b =>
+            modelBuilder.Entity("Onboard12.Server.Models.Customer", b =>
                 {
                     b.Navigation("Sales");
                 });
 
-            modelBuilder.Entity("StoreReact.Models.Product", b =>
+            modelBuilder.Entity("Onboard12.Server.Models.Product", b =>
                 {
                     b.Navigation("Sales");
                 });
 
-            modelBuilder.Entity("StoreReact.Models.Store", b =>
+            modelBuilder.Entity("Onboard12.Server.Models.Store", b =>
                 {
                     b.Navigation("Sales");
                 });

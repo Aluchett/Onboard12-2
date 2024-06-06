@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace StoreReact.Models;
+namespace Onboard12.Server.Models;
+
 
 public class StoreDbContext : DbContext 
 {
